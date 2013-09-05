@@ -26,7 +26,7 @@ describe('SiteSearch integration test', function() {
             size = links.size()
             ;
 
-        Y.Node.create('<a href="test/page.html">link1</a>').appendTo('body');
+        Y.Node.create('<a href="test/page.html">link0</a><br>').appendTo('body');
 
         links = SiteSearch.fetchInternalLinks();
 
@@ -34,21 +34,21 @@ describe('SiteSearch integration test', function() {
     });
 
     it('search site for "test"', function () {
-        Y.Node.create('<a href="test/page.html">link1</a>').appendTo('body');
-        Y.Node.create('<a href="test/page1.html">link2</a>').appendTo('body');
+        Y.Node.create('<a href="test/page.html">link1</a><br>').appendTo('body');
+        Y.Node.create('<a href="test/page1.html">link2</a><br>').appendTo('body');
 
         var links = SiteSearch.fetchInternalLinks(),
             size = links.size()
             ;
 
         SiteSearch.searchSite("test", function (node) {
-            Y.Node.create('<a href="'+node.getAttribute('href')+'">'+node.get('text')+'</a>')
+            Y.Node.create('<a href="'+node.getAttribute('href')+'">'+node.get('text')+'</a><br>')
                 .appendTo('body');
         });
 
         waitsFor(function () {
             links = SiteSearch.fetchInternalLinks();
-            return links.size() === size + 1;
+            return links.size() === size * 2;
         }, 1000);
     });
 
