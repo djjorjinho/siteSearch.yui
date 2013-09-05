@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=$sourceEncoding$">
+    $if(autoRefresh)$
+    <meta http-equiv="refresh" content="$autoRefreshInterval$">
+    $endif$
+    <title>Jasmine Spec Runner</title>
+    $cssDependencies$
+    $javascriptDependencies$
+    $allScriptTags$
+</head>
+<body>
+<script>
+var Y;
+YUI().use(['site-search', 'node'], function (YUI) {
+    Y = YUI;
+
+    var executeJasmineSpecs = function(){
+        window.reporter = new jasmine.$reporter$(); jasmine.getEnv().addReporter(reporter);
+        if ('$reporter$' == 'HtmlReporter') {
+            jasmine.getEnv().specFilter = function(spec) {
+                return window.reporter.specFilter(spec);
+            };
+        }
+
+        //Don't do live updates when running through HTMLUnit
+        if ('$reporter$' == 'JsApiReporter'){
+            jasmine.getEnv().updateInterval = Number.MAX_VALUE;
+        }
+
+        jasmine.getEnv().execute();
+    };
+
+    executeJasmineSpecs();
+});
+
+
+</script>
+</body>
+</html>
