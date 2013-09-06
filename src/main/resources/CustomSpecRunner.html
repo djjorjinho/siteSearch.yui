@@ -13,29 +13,26 @@
 <body>
 <script>
 var Y;
+var executeJasmineSpecs = function(){
+    window.reporter = new jasmine.$reporter$(); jasmine.getEnv().addReporter(reporter);
+    if ('$reporter$' == 'HtmlReporter') {
+        jasmine.getEnv().specFilter = function(spec) {
+            return window.reporter.specFilter(spec);
+        };
+    }
+
+    //Don't do live updates when running through HTMLUnit
+    if ('$reporter$' == 'JsApiReporter'){
+        jasmine.getEnv().updateInterval = Number.MAX_VALUE;
+    }
+
+    jasmine.getEnv().execute();
+};
 YUI().use(['site-search', 'node'], function (YUI) {
     Y = YUI;
 
-    var executeJasmineSpecs = function(){
-        window.reporter = new jasmine.$reporter$(); jasmine.getEnv().addReporter(reporter);
-        if ('$reporter$' == 'HtmlReporter') {
-            jasmine.getEnv().specFilter = function(spec) {
-                return window.reporter.specFilter(spec);
-            };
-        }
-
-        //Don't do live updates when running through HTMLUnit
-        if ('$reporter$' == 'JsApiReporter'){
-            jasmine.getEnv().updateInterval = Number.MAX_VALUE;
-        }
-
-        jasmine.getEnv().execute();
-    };
-
-    executeJasmineSpecs();
+    Y.on("domready", function () {executeJasmineSpecs();}, this);
 });
-
-
 </script>
 </body>
 </html>

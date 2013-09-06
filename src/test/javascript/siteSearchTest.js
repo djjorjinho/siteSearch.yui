@@ -49,7 +49,7 @@ describe('SiteSearch integration test', function() {
         waitsFor(function () {
             links = SiteSearch.fetchInternalLinks();
             return links.size() === size * 2;
-        }, 1000);
+        }, "Anchors must be added to the page", 1000);
     });
 
 });

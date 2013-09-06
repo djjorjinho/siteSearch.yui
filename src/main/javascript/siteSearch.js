@@ -1,3 +1,4 @@
+/*global YUI:true*/
 YUI.add('site-search', function(Y) {
 
     var DLL = Y.namespace('DLL'),
