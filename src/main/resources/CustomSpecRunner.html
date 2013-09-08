@@ -28,7 +28,7 @@ var executeJasmineSpecs = function(){
 
     jasmine.getEnv().execute();
 };
-YUI().use(['site-search', 'node'], function (YUI) {
+YUI().use(['site-search', 'node', 'node-event-simulate'], function (YUI) {
     Y = YUI;
 
     Y.on("domready", function () {executeJasmineSpecs();}, this);
