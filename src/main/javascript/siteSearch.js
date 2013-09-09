@@ -147,7 +147,7 @@ YUI.add('site-search', function(Y) {
                 results.setStyles({
                     'display': 'none'
                 });
-                SiteSearch.searchSite(input.get('value'), function (node) {
+                DLL.SiteSearch.searchSite(input.get('value'), function (node) {
                     results.setStyles({
                         'display': 'block'
                     });
